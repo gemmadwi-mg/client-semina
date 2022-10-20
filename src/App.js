@@ -1,39 +1,56 @@
-import Button from './components/Button';
+import { useState } from 'react';
 import './App.css';
-import { Hello } from './Hello';
-import { Title } from './Title';
-import Table from './components/Table';
+import Button from './components/Button';
+import Input from './components/Input';
+
 
 function App() {
-  const users = [{
-    _id: 1,
-    name: 'Gemma', age: 21,
-    status: true,
-  }, {
-    _id: 2,
-    name: 'Nungky', age: 21,
-    status: true,
-  }, {
-    _id: 3,
-    name: 'Sihab', age: 21,
-    status: false,
-  },];
+  const [number, setNumber] = useState(0);
+  // const [name, setName] = useState('');
+  // const [tahunLahir, setTahunLahir] = useState('');
+  // const [usia, setUsia] = useState('');
+  const [form, setForm] = useState({
+    name: '',
+    usia: '',
+    tahunLahir: ''
+  })
 
-  const isLogin = true;
+  const [error, setError] = useState('')
+
+
+  const klik = () => {
+    setNumber(number + 1);
+  }
+
+  const handleSubmit = () => {
+    setForm({ ...form, usia: 2022 - form.tahunLahir })
+  }
+
+  const handleChange = e => {
+    setForm({ ...form, [e.target.name]: e.target.value })
+  }
 
   return (
     <>
-      <h1>Welcome to react</h1>
-      <ul>
-        <li>Home</li>
-        <li>Users</li>
-        <li>{ isLogin ? "Sudah login" : "Login"}</li>
-      </ul>
-      <h1><Hello /></h1>
-      <Title name="Gemma Dwi Prasetya" />
+      <h1>Counter app</h1>
+      <p>Nilai counter saat ini {number}</p>
+      <Button onClick={klik}>
+        Click me
+      </Button>
+      <hr />
+      <h1>Aplikasi input data diri</h1>
+      name : <Input type='text' value={form.name} name="name" onChange={handleChange} />
       <br />
-      <Button onClick={() => alert('Click save')}>Save</Button>
-      <Table user={users}/>
+      <br />
+      Tahun Lahir : <Input type='number' value={form.tahunLahir} name="tahunLahir" onChange={handleChange} />
+      <br />
+      <br />
+      Umur Saya : {form.usia}
+      <br />
+      <br />
+
+      <Button onClick={handleSubmit}>Submit</Button>
+
     </>
   );
 }
