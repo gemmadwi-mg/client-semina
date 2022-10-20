@@ -15,7 +15,7 @@ function App() {
     tahunLahir: ''
   })
 
-  const [error, setError] = useState('')
+  const [error, setError] = useState('');
 
 
   const klik = () => {
@@ -23,10 +23,18 @@ function App() {
   }
 
   const handleSubmit = () => {
-    setForm({ ...form, usia: 2022 - form.tahunLahir })
+    if (form.name === "") {
+      setError('nama tidak boleh kosong');
+    } else if(form.tahunLahir === "") { 
+      setError('tahun lahir tidak boleh kosong');
+    } else {
+      setForm({ ...form, usia: 2022 - form.tahunLahir })
+    }
+
   }
 
   const handleChange = e => {
+    setError('');
     setForm({ ...form, [e.target.name]: e.target.value })
   }
 
@@ -50,6 +58,7 @@ function App() {
       <br />
 
       <Button onClick={handleSubmit}>Submit</Button>
+      <p style={{ color: 'red'}}>{error}</p>
 
     </>
   );
