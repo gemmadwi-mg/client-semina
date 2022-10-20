@@ -13,10 +13,11 @@ export default function Table({ user }) {
             <tbody>
                 {user.map(user => {
                     return (
-                        <tr><td>
-                            {user.id}</td><td>
-                                {user.name}</td><td>
-                                {user.age}</td></tr>
+                        <tr key={user._id}>
+                            <td>{user._id}</td>
+                            <td>{user.name}</td>
+                            <td>{user.age}</td>
+                        </tr>
                     )
                 })}
             </tbody>
