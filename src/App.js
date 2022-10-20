@@ -4,20 +4,42 @@ import { Hello } from './Hello';
 import { Title } from './Title';
 
 function App() {
-  const users = ['gemma', 'nungky', 'Hiji'];
+  const users = [{
+    _id: 1,
+    name: 'Gemma', age: 21,
+    status: true,
+  }, {
+    _id: 1,
+    name: 'Nungky', age: 21,
+    status: true,
+  }, {
+    _id: 1,
+    name: 'Sihab', age: 21,
+    status: false,
+  },];
+
+  const isLogin = true;
 
   return (
     <>
-      <h1>Hello React</h1>
+      <h1>Welcome to react</h1>
+      <ul>
+        <li>Home</li>
+        <li>Users</li>
+        <li>{ isLogin ? "Sudah login" : "Login"}</li>
+      </ul>
       <h1><Hello /></h1>
       <Title name="Gemma Dwi Prasetya" />
       <br />
-      <Title name="Dwi" />
-      <br />
-      <Title />
       <Button onClick={() => alert('Click save')}>Save</Button>
       <ul>
-        {users.map((user, index) => { return <li key={index}>{user}</li> })}
+        {users.map((user, index) => {
+          return (
+            <>
+              {user.status && <li key={index}>{`Nama saya ${user.name} dan usia ${user.age}`}</li>}
+            </>
+          )
+        })}
       </ul>
     </>
   );
