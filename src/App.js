@@ -1,3 +1,4 @@
+import React from "react";
 import {
   BrowserRouter,
   Routes,
@@ -9,11 +10,19 @@ import {
 } from "react-router-dom";
 import './App.css';
 
+function useQuery() { 
+  const {search} = useLocation();
+
+  return React.useMemo(() => new URLSearchParams(search), [search]);
+}
+
 function Home() {
   return <h1>Home</h1>;
 }
 function Categories() {
-  let location = useLocation();
+  const query = useQuery();
+
+  console.log(query.get('page'))
   return (
     <>
       <h1>C</h1>
