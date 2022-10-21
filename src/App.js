@@ -5,6 +5,7 @@ import {
   Route
 } from "react-router-dom";
 import './App.css';
+import PageDashboard from "./pages/dashboard";
 import PageSignIn from "./pages/signin";
 
 function App() {
@@ -12,8 +13,8 @@ function App() {
 
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<>home</>} />
-        <Route path="signin" element={<PageSignIn />} />
+        <Route path="/signin" element={<PageSignIn />} />
+        <Route path="/signin" element={<PageDashboard />} />
       </Routes>
     </BrowserRouter>
 
