@@ -13,8 +13,9 @@ function App() {
 
     <BrowserRouter>
       <Routes>
+        <Route path="/" element={<PageDashboard />} />
         <Route path="/signin" element={<PageSignIn />} />
-        <Route path="/signin" element={<PageDashboard />} />
+
       </Routes>
     </BrowserRouter>
 

@@ -3,14 +3,16 @@ import Container from 'react-bootstrap/Container';
 import Card from 'react-bootstrap/Card';
 import axios from 'axios';
 import SAlert from '../../components/Alert';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Navigate } from 'react-router-dom';
 import { config } from '../../configs';
 import SForm from './form';
 
 function PageSignIn() {
+    const token = localStorage.getItem('token');
+    
     const navigate = useNavigate();
     const [form, setForm] = useState({
-        email: '',
+        email: '', 
         password: ''
     })
 
@@ -33,8 +35,8 @@ function PageSignIn() {
                 form
 
             });
-            console.log(response)
-
+            console.log(response.data.data.token)
+            localStorage.setItem('token', response.data.data.token)
             setIsLoading(false);
             navigate(false);
         } catch (error) {
@@ -48,7 +50,10 @@ function PageSignIn() {
 
         }
 
-    }
+    };
+
+    if(token) return <Navigate to='/' replace={true}/>
+    
 
     return (
         <Container md={12} className='my-5'>
