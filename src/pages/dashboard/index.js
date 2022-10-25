@@ -3,22 +3,14 @@ import { Navigate } from 'react-router-dom';
 import { Container, Nav, Navbar, Breadcrumb, Table } from 'react-bootstrap';
 import SButton from '../../components/Button';
 import SBreadCrumb from '../../components/Breadcrumb';
+import SNavbar from '../../components/Navbar';
 
 export default function PageDashboard() {
   const token = localStorage.getItem('token');
-  // if (!token) return <Navigate to='/signin' replace={true} />
+  if (!token) return <Navigate to='/signin' replace={true} />
   return (
     <>
-      <Navbar bg="dark" variant="dark">
-        <Container>
-          <Navbar.Brand href="#home">Semina</Navbar.Brand>
-          <Nav className="me-auto">
-            <Nav.Link href="#home">Home</Nav.Link>
-            <Nav.Link href="#features">Categories</Nav.Link>
-            <Nav.Link href="#pricing">Talents</Nav.Link>
-          </Nav>
-        </Container>
-      </Navbar>
+      <SNavbar />
       <Container className='mt-3'>
 
         <SBreadCrumb />

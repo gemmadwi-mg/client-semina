@@ -9,10 +9,10 @@ import SForm from './form';
 
 function PageSignIn() {
     const token = localStorage.getItem('token');
-    
+
     const navigate = useNavigate();
     const [form, setForm] = useState({
-        email: '', 
+        email: '',
         password: ''
     })
 
@@ -31,10 +31,9 @@ function PageSignIn() {
     const handleSubmit = async () => {
         setIsLoading(true);
         try {
-            const response = axios.post(`${config.api_host_dev}/cms/auth/signin`, {
+            const response = await axios.post(`${config.api_host_dev}/cms/auth/signin`,
                 form
-
-            });
+            );
             console.log(response.data.data.token)
             localStorage.setItem('token', response.data.data.token)
             setIsLoading(false);
@@ -52,8 +51,8 @@ function PageSignIn() {
 
     };
 
-    if(token) return <Navigate to='/' replace={true}/>
-    
+    if (token) return <Navigate to='/' replace={true} />
+
 
     return (
         <Container md={12} className='my-5'>
