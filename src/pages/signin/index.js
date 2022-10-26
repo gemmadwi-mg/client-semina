@@ -1,14 +1,14 @@
 import React, { useState } from 'react'
-import Container from 'react-bootstrap/Container';
-import Card from 'react-bootstrap/Card';
-import axios from 'axios';
+import { Container, Card } from 'react-bootstrap';
 import SAlert from '../../components/Alert';
 import { useNavigate, Navigate } from 'react-router-dom';
-import { config } from '../../configs';
 import SForm from './form';
+import { postData } from '../../utils/fetch';
+import { useDispatch } from "react-redux";
+import { userLogin } from "../../redux/auth/actions";
 
 function PageSignIn() {
-    const token = localStorage.getItem('token');
+    const dispatch = useDispatch();
 
     const navigate = useNavigate();
     const [form, setForm] = useState({
@@ -31,11 +31,12 @@ function PageSignIn() {
     const handleSubmit = async () => {
         setIsLoading(true);
         try {
-            const response = await axios.post(`${config.api_host_dev}/cms/auth/signin`,
+            const response = await postData(`/cms/auth/signin`,
                 form
             );
-            console.log(response.data.data.token)
-            localStorage.setItem('token', response.data.data.token)
+            
+            dispatch(userLogin(response.data.data.token, response.data.data.role))
+
             setIsLoading(false);
             navigate(false);
         } catch (error) {
@@ -50,8 +51,6 @@ function PageSignIn() {
         }
 
     };
-
-    if (token) return <Navigate to='/' replace={true} />
 
 
     return (
